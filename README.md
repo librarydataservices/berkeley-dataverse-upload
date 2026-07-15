@@ -1,5 +1,5 @@
 # berkeley-dataverse-upload
-A example script for bulk uploading directories to datasets hosted on the [UC Berkeley Library Dataverse](https://datasets.lib.berkeley.edu/) using the [python-dvuploader](https://github.com/gdcc/python-dvuploader) library.
+A tool for bulk uploading directories to datasets hosted on the [UC Berkeley Library Dataverse](https://datasets.lib.berkeley.edu/) using the [python-dvuploader](https://github.com/gdcc/python-dvuploader) library.
 
 ## Table of Contents
 
