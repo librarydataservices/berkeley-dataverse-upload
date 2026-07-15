@@ -197,13 +197,15 @@ source venv/bin/activate  # macOS/Linux
 
 ### Authentication Errors
 
-**Error: API tokennot found.**
+#### ⚠️ API tokennot found
+
 Please add your Dataverse API token to the .env file.
 - Ensure you have created a `.env` file (copy from `.env.example`)
 - Verify the file contains `API_TOKEN=your_token_here`
 - Check that the `.env` file is in the project root directory
 
-**Error: Invalid API token.**
+#### ⚠️ Invalid API token
+
 Please check that your API_TOKEN in .env is correct and has not expired.
 - Verify your API token is correctly copied to `.env` (no extra spaces)
 - Generate a new token if it has expired
@@ -211,37 +213,37 @@ Please check that your API_TOKEN in .env is correct and has not expired.
 
 ### Dataset Errors
 
-**Error: Dataset not found.**
-Could not find dataset: doi:10.xxxx/xxxxx
+#### ⚠️ Dataset not found
+
 Please check that the `persistent_id` in `config.toml` is correct.
 - Verify the dataset DOI in `config.toml` matches your target dataset
 - Ensure the DOI includes doi: at the beginning (e.g., `doi:10.60503/D3/XGAOLF`)
 - Confirm the dataset exists and hasn't been deleted
 
-**Error: Permission denied.**
-You do not have permission to upload to dataset: doi:10.xxxx/xxxxx
-Please contact the dataset owner to request upload access.
+#### ⚠️ Permission denied
+
+You do not have permission to upload to dataset. Please contact the dataset owner to request upload access.
 - Your API token is valid but you don't have upload rights for this dataset
 - Contact the dataset owner or administrator to request contributor access
 - Verify you're uploading to the correct dataset
 
 ### Connection Errors
 
-**Error: Connection failed.**
+#### ⚠️ Connection failed
+
 Could not connect to Dataverse at ,https://datasets.lib.berkeley.edu/.
-Please check your internet connection and the dv_url in `config.toml`.
 - Check your internet connection
 - Verify the `dv_url` in `config.toml` is correct
 - The Dataverse server may be temporarily unavailable
 
 ### Directory Errors
 
-**Warning: [path] is not a valid directory. Skipping.**
+#### ⚠️ Warning: [path] is not a valid directory. Skipping.
 - Check that the path in `config.toml` exists
 -  Windows users: Use forward slashes (`data/files`) or double backslashes (`data\\files`), not single backslashes
 - Paths can be relative to `config.toml` or absolute
 
-**No valid directories found to upload. Exiting.**
+##### ⚠️ No valid directories found to upload. Exiting.
 - Ensure at least one valid `[[directories]]` entry exists in `config.toml`
 - Verify the specified directories contain files
 
