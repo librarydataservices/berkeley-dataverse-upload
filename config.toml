@@ -1,0 +1,23 @@
+[dataset]
+# URL to Dataverse instance (default: "https://datasets.lib.berkeley.edu/")
+dv_url = "https://datasets.lib.berkeley.edu/"
+
+# Persistent Identifier (i.e. DOI) of the Dataverse dataset to which you want to upload files 
+persistent_id = "doi:REPLACE_WITH_DATASET_DOI"
+
+
+[settings]
+# Number of parallel uploads (default: 2)
+# Note: Settings with a value greater than 1 may cause issues with large files and/or slow internet connections
+n_parallel_uploads = 2
+
+
+[[directories]]
+# Path to the directories you want to upload (default: "./data")
+# All files in directory will be uploaded
+# Use an absolute path or a relative path from the location of this config file
+dir_path = "./data"
+
+
+#[[directories]]
+# You may specify multiple directories by adding additional [[directories]] sections
