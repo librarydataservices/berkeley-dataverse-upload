@@ -57,7 +57,7 @@ def main():
     API_TOKEN = os.getenv("API_TOKEN")
     DV_URL = config["dataset"]["dv_url"]
     PID = config["dataset"]["persistent_id"]
-    N_PARALLEL_UPLOADS = config["settings"]["n_parallel_uploads"]
+    N_PARALLEL_UPLOADS = config.get("settings", {}).get("n_parallel_uploads", 2)
 
     # Check API token before proceeding
     if not API_TOKEN:

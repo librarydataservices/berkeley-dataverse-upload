@@ -5,11 +5,11 @@ A example script for bulk uploading directories to datasets hosted on the [UC Be
 - Bulk upload entire directories to Dataverse datasets
 - Configurable via TOML file
 - Secure API token management via environment variable
-- Support for dependecy management with `[uv](https://github.com/astral-sh/uv)`
+- Support for dependecy management with [uv](https://github.com/astral-sh/uv)
 
 ## Installation
 
-### Using `uv` (Recommended)
+### Using uv (Recommended)
 [uv](https://docs.astral.sh/uv/) is an extremely fast Python and project manager. This is the recommended approach for the fastest setup experience. See [Installing uv](docs.astral.sh/uv/getting-started/installation/).
 
 #### 1. Clone the repository
@@ -76,32 +76,22 @@ API_TOKEN="REPLACE WITH TOKEN"
 
 > **Security Note:** Never commit your `.env` file or share your API token publicly. The `.env` file is included in the `.gitignore` by default.
 
-### Configureation file (`config.toml`)
+### Configuration file (`config.toml`)
 Edit `config.tom;` to specify your upload sedttings.
 
 #### Configuration Options
 
-##### `[dataset]` -- Dataverse connection settings
+| Section | Parameter | Description | Default | Required |
+|---------|-----------|-------------|---------|----------|
+| `[dataset]` | `dv_url` | URL of the Dataverse instance | `https://datasets.lib.berkeley.edu/` | Yes |
+| `[dataset]` | `persistent_id` | DOI of the target dataset (e.g., `doi:10.xxxx/xxxxx`) | — | Yes |
+| `[settings]` | `n_parallel_uploads` | Number of concurrent file uploads | `2` | No |
+| `[[directories]]` | `dir_path` | Path to directory containing files to upload | `./data` | Yes |
 
-| Parameter | Description | Default | Required  |
-|---|---|---|---|
-| `dv_url` | URL of the Dataverse instance | `https://datasets.lib.berkeley.edu/` | Yes |
-| `persistent_id` | DOI of the target dataset (e.g. `doi:10.xxxx/xxxxx`) | -- | Yes |
-
-##### `[settings]` -- Upload behavior
-
-| Parameter | Description | Default | Required  |
-|---|---|---|---|
-| `n_parallel_uploads` | Number of concurrent file uploads | `2` | no |
-
-> **Note:** Setting `n_parallel_uploads to values greater than 2 may cause issues with large files or slow internet connections.
-
-##### `[[directories]]` -- Directories to upload
-| Parameter | Description | Default | Required  |
-|---|---|---|---|
-| `dir_path` | Path to directory containing files to upload | `./data` | Yes |
-
-> **Note:** All files within a specified directory will be uploaded. Paths can be absolute or relative to root of the project.
+> **Notes:**
+> - Setting `n_parallel_uploads` to values greater than 2 may cause issues with large files or slow internet connections.
+> - All files within a specified directory will be uploaded. 
+> - Paths can be absolute or relative to the project root.
 
 #### Uploading Multiple Directories
 
