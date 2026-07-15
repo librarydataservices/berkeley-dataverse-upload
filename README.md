@@ -23,7 +23,7 @@ A tool for bulk uploading directories to datasets hosted on the [UC Berkeley Lib
 ## Installation
 
 ### Using uv (Recommended)
-[uv](https://docs.astral.sh/uv/) is an extremely fast Python and project manager. This is the recommended approach for the fastest setup experience. See [Installing uv](docs.astral.sh/uv/getting-started/installation/).
+[uv](https://docs.astral.sh/uv/) is an extremely fast Python and project manager. This is the recommended approach for the fastest setup experience. See [Installing uv](https://docs.astral.sh/uv/getting-started/installation/).
 
 #### 1. Clone the repository
 ``` bash
@@ -33,6 +33,10 @@ cd berkeley-dataverse-upload
 
 #### 2. Sync dependencies
 uv will read from `pyproject.toml` and `uv.lock` to create a virtual environment and install all dependencies.
+
+```
+uv sync
+```
 
 ---
 
@@ -104,7 +108,7 @@ Edit `config.toml` to specify your upload settings.
 #### Finding your Dataset DOI
 1. Navigate to your dataset on [UC Berkeley Library Dataverse](https://datasets.lib.berkeley.edu/).
 2. The DOI is displayed in the dataset citation and under **metadata** > **Persistent Identifier**.
-3. Copy the DOI identifier (following `doi:` or the the `doi.org/` proxy) and paste into `config.toml`.
+3. Copy the DOI identifier (following `doi:` or the `doi.org/` proxy) and paste into `config.toml`.
 
 #### Uploading Multiple Directories
 
@@ -141,8 +145,9 @@ source venv/bin/activate
 
 # Windows
 venv\Scripts\activate
+```
 
-2. Run the script
+2. Run the script.
 
 ``` bash
 python main.py
@@ -320,5 +325,5 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 
 ## Contact
 UC Berkeley Library Data Services
-- Email: [librarydataservices@berkeley.edu]( librarydataservices@berkeley.edu)
+- Email: [librarydataservices@berkeley.edu]( mailto:librarydataservices@berkeley.edu)
 - GitHub: [@librarydataservices](https://github.com/librarydataservices)
