@@ -81,7 +81,7 @@ def main():
             continue
 
         # Add directory to list
-        directories.append(*dv.add_directory(dir_path))
+        directories.extend(dv.add_directory(dir_path))
 
     # File metadata settings
     for file_obj in directories:
