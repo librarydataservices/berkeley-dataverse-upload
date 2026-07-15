@@ -85,13 +85,13 @@ Edit `config.tom;` to specify your upload sedttings.
 |---------|-----------|-------------|---------|----------|
 | `[dataset]` | `dv_url` | URL of the Dataverse instance | `https://datasets.lib.berkeley.edu/` | Yes |
 | `[dataset]` | `persistent_id` | DOI of the target dataset (e.g., `doi:10.xxxx/xxxxx`) | — | Yes |
-| `[settings]` | `n_parallel_uploads` | Number of concurrent file uploads | `2` | No |
-| `[[directories]]` | `dir_path` | Path to directory containing files to upload | `./data` | Yes |
+| `[settings]` | `n_parallel_uploads` | Number of concurrent file uploads (values greater than `2` may cause issuesw with large files or slow internet connections) | `2` | No |
+| `[[directories]]` | `dir_path` | Path (relative or absolute) to directory containing files to upload. Note: all files within a specified directory will be uploaded. | `./data` | Yes |
 
-> **Notes:**
-> - Setting `n_parallel_uploads` to values greater than 2 may cause issues with large files or slow internet connections.
-> - All files within a specified directory will be uploaded. 
-> - Paths can be absolute or relative to the project root.
+#### Finding your Dataset DOI
+1. Navigate to your dataset on [UC Berkeley Library Dataverse](https://datasets.lib.berkeley.edu/).
+2. The DOI is displayed in the dataset citation and under **metadata** > **Persistent Identifier**.
+3. Copy the DOI identifier (following `doi:` or the the `doi.org/` proxy) and paste into `config.toml`.
 
 #### Uploading Multiple Directories
 
@@ -107,11 +107,6 @@ dir_path = "./images"
 [[directories]]
 dir_path = "/absolute/path/to/other/directory"
 ```
-
-#### Finding your Dataset DOI
-1. Navigate to your dataset on [UC Berkeley Library Dataverse](https://datasets.lib.berkeley.edu/).
-2. The DOI is displayed in the dataset citation and under **metadata** > **Persistent Identifier**.
-3. Copy the DOI identifier (following `doi:` or the the `doi.org/` proxy) and paste into `config.toml`.
 
 ## Usage
 
