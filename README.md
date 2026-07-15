@@ -1,11 +1,24 @@
 # berkeley-dataverse-upload
 A example script for bulk uploading directories to datasets hosted on the [UC Berkeley Library Dataverse](https://datasets.lib.berkeley.edu/) using the [python-dvuploader](https://github.com/gdcc/python-dvuploader) library.
 
+## Table of Contents
+
+- [Features](#features)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Usage](#usage)
+- [Advanced Options](#advanced-options)
+- [Project Structure](#project-structure)
+- [Troubleshooting](#troubleshooting)
+- [License](#license)
+- [Acknowledgements](#acknowledgements)
+- [Contact](#contact)
+
 ## Features
 - Bulk upload entire directories to Dataverse datasets
 - Configurable via TOML file
 - Secure API token management via environment variable
-- Support for dependecy management with [uv](https://github.com/astral-sh/uv)
+- Support for dependency management with [uv](https://github.com/astral-sh/uv)
 
 ## Installation
 
@@ -19,7 +32,7 @@ cd berkeley-dataverse-upload
 ```
 
 #### 2. Sync dependencies
-uv wll read from `pyproject.toml` and `uv.lock` to create a virtual environment and install all dependencies.
+uv will read from `pyproject.toml` and `uv.lock` to create a virtual environment and install all dependencies.
 
 ---
 
@@ -77,7 +90,7 @@ API_TOKEN="REPLACE WITH TOKEN"
 > **Security Note:** Never commit your `.env` file or share your API token publicly. The `.env` file is included in the `.gitignore` by default.
 
 ### Configuration file (`config.toml`)
-Edit `config.tom;` to specify your upload sedttings.
+Edit `config.toml` to specify your upload settings.
 
 #### Configuration Options
 
@@ -85,7 +98,7 @@ Edit `config.tom;` to specify your upload sedttings.
 |---------|-----------|-------------|---------|----------|
 | `[dataset]` | `dv_url` | URL of the Dataverse instance | `https://datasets.lib.berkeley.edu/` | Yes |
 | `[dataset]` | `persistent_id` | DOI of the target dataset (e.g., `doi:10.xxxx/xxxxx`) | — | Yes |
-| `[settings]` | `n_parallel_uploads` | Number of concurrent file uploads (values greater than `2` may cause issuesw with large files or slow internet connections) | `2` | No |
+| `[settings]` | `n_parallel_uploads` | Number of concurrent file uploads (values greater than `2` may cause issues with large files or slow internet connections) | `2` | No |
 | `[[directories]]` | `dir_path` | Path (relative or absolute) to directory containing files to upload. Note: all files within a specified directory will be uploaded. | `./data` | Yes |
 
 #### Finding your Dataset DOI
@@ -111,11 +124,11 @@ dir_path = "/absolute/path/to/other/directory"
 ## Usage
 
 ### Running with uv
-uv provides the `uv run` command which automaticaly uses the project's virual environment. 
+uv provides the `uv run` command which automatically uses the project's virtual environment. 
 
 ``` bash
 # Basic usage
-uv run main.opy
+uv run main.py
 ```
 
 ### Running with Python directly
@@ -168,15 +181,15 @@ file_obj.categories = None
 
 ``` bash
 .
-├──.env.example        # Template for environemnt variables
+├──.env.example        # Template for environment variables
 ├──.gitignore
 ├──.python-version     # Python version specification for uv
 ├──config.toml         # Upload configuration
 ├──LICENSE             # MIT License
 ├──main.py             # Main entry point
-├──pyproject.toml      # Project metadata and dependenceis
+├──pyproject.toml      # Project metadata and dependencies
 ├──README.md
-├──uv.lock             # Locked depdendencies for reproducibility (uv)
+├──uv.lock             # Locked dependencies for reproducibility (uv)
 ```
 
 ## Troubleshooting
