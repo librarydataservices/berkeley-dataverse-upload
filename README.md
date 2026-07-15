@@ -82,7 +82,7 @@ cp .env.example .env
 API_TOKEN="REPLACE WITH TOKEN"
 ```
 
-#### Obtaining an API TOken
+#### Obtaining an API Token
 1. Log in to [UC Berkeley Library Dataverse](https://datasets.lib.berkeley.edu/).
 2. Click your account name in the navbar, then select "API Token" from the dropdown.
 3. Click "Create Token."
