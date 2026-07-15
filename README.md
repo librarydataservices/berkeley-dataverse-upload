@@ -308,7 +308,7 @@ No uploadable files were found in the configured directories.
 If you encounter issues not covered here:
 1. Check the [python-dvuploader documentation](https://github.com/gdcc/python-dvuploader)
 2. Check the [uv documentation](https://docs.astral.sh/uv/)
-3. Search existing [GitHub Issues](https://github.com/[your-username]/[repo-name]/issues)
+3. Search existing [GitHub Issues](https://github.com/librarydataservices/berkeley-dataverse-upload/issues)
 4. Open a new issue with details about your problem
 
 ## License
@@ -321,4 +321,4 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 ## Contact
 UC Berkeley Library Data Services
 - Email: [librarydataservices@berkeley.edu]( librarydataservices@berkeley.edu)
-- GitHub: [@librarydataservices]()
+- GitHub: [@librarydataservices](https://github.com/librarydataservices)
