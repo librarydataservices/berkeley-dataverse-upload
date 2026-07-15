@@ -149,6 +149,36 @@ venv\Scripts\activate
 ``` bash
 python main.py
 ```
+
+## Advanced Options
+
+This project provides a simplified configuration for common upload tasks. The underlying [python-dvuploader](https://github.com/gdcc/python-dvuploader) library supports additional features that advanced users may find useful.
+
+### Additional Capabilities
+
+**Uploading individual files** — Instead of entire directories, you can upload specific files.
+
+**File-level metadata** — Each file or directory can include:
+
+| Option | Description |
+|--------|-------------|
+| `filepath` | Path to the file to upload |
+| `directory_label` | Directory path within the dataset to upload the file to |
+| `description` | Description of the file |
+| `mimetype` | MIME type of the file |
+| `categories` | List of categories to assign to the file |
+| `restrict` | Mark file as restricted (default: `False`) |
+| `tabIngest` | Ingest tabular files for Dataverse's data exploration tools (default: `True`) |
+
+### Modifying Default Behavior
+
+This project sets the following defaults in `main.py`:
+
+```python
+file_obj.tab_ingest = False
+file_obj.categories = None
+```
+
 ## Project Structure
 
 ``` bash
