@@ -6,11 +6,14 @@ from dotenv import load_dotenv
 import httpx
 import dvuploader as dv
 
+# Constants for output
+BOLD = "\033[1m"
+RESET = "\033[0m"
 
-def check_api_token(api_token: str, dataverse_url: str, persistent_id: str) -> bool:
+def check_dataverse_access(api_token: str, dataverse_url: str, persistent_id: str) -> bool:
     """
-    Check if the API token is valid by making a test request.
-    Returns True if valid, False otherwise.
+    Check if we can access the dataset with the provided credentials.
+    Returns True if successful, False otherwise.
     """
     base_url = dataverse_url.rstrip("/")
     test_url = f"{base_url}/api/datasets/:persistentId/?persistentId={persistent_id}"
@@ -18,16 +21,26 @@ def check_api_token(api_token: str, dataverse_url: str, persistent_id: str) -> b
     
     try:
         response = httpx.get(test_url, headers=headers)
+        
         if response.status_code == 401:
-            print("Error: Invalid API token.")
+            print(f"\n{BOLD}⚠️  Error: Invalid API token.{RESET}")
             print("Please check that your API_TOKEN in .env is correct and has not expired.")
-            print(f"You can generate a new token at: {base_url}/dataverseuser.xhtml?selectTab=apiTokenTab")
+            print(f"You can generate a new token at: {base_url}/dataverseuser.xhtml?selectTab=apiTokenTab\n")
             return False
+        
+        if response.status_code == 404:
+            print(f"\n{BOLD}⚠️  Error: Dataset not found.{RESET}")
+            print(f"Could not find dataset: {persistent_id}")
+            print("Please check that the persistent_id in config.toml is correct.\n")
+            return False
+        
         response.raise_for_status()
         return True
+    
     except httpx.RequestError as e:
-        print(f"Error: Could not connect to Dataverse at {dataverse_url}")
-        print("Please check your internet connection and the dv_url in config.toml.")
+        print(f"\n{BOLD}⚠️  Error: Connection failed.{RESET}")
+        print(f"Could not connect to Dataverse at {dataverse_url}")
+        print("Please check your internet connection and the dv_url in config.toml.\n")
         return False
 
 
@@ -48,11 +61,12 @@ def main():
 
     # Check API token before proceeding
     if not API_TOKEN:
-        print("Error: API_TOKEN not found in .env file.")
+        print(f"\n{BOLD}⚠️  Error: API_TOKEN not found in .env file.{RESET}")
         print("Please add your Dataverse API token to the .env file.")
+        print("You can generate a new token at: https://datasets.lib.berkeley.edu/dataverseuser.xhtml?selectTab=apiTokenTab\n")
         return
     
-    if not check_api_token(API_TOKEN, DV_URL, PID):
+    if not check_dataverse_access(API_TOKEN, DV_URL, PID):
         return
 
     directories = []  # init directories list
@@ -76,17 +90,26 @@ def main():
 
     # Check for valid directories
     if not directories:
-        print("No valid directories found to upload. Exiting.")
+        print(f"\n{BOLD}⚠️  No valid directories found to upload. Exiting.{RESET}\n")
         return
 
     # Upload directories to Dataverse
     dvuploader = dv.DVUploader(files=directories)
-    dvuploader.upload(
-        api_token=API_TOKEN,
-        dataverse_url=DV_URL,
-        persistent_id=PID,
-        n_parallel_uploads=N_PARALLEL_UPLOADS
-    )
+    
+    try:
+        dvuploader.upload(
+            api_token=API_TOKEN,
+            dataverse_url=DV_URL,
+            persistent_id=PID,
+            n_parallel_uploads=N_PARALLEL_UPLOADS
+        )
+    except httpx.HTTPStatusError as e:
+        if e.response.status_code == 403:
+            print(f"\n{BOLD}⚠️  Error: Permission denied.{RESET}")
+            print(f"You do not have permission to upload to dataset: {PID}")
+            print("Please contact the dataset owner to request upload access.\n")
+            return
+        raise  # Re-raise if it's a different HTTP error
 
 
 if __name__ == "__main__":
